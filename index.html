@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>gridsz · image grid splitter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-name">grid<span>sz</span></span>
+        <span class="brand-tag">v2.0</span>
+      </div>
+      <div class="header-meta">
+        <div class="meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          @abdu-xx
+        </div>
+        <div class="meta-dot"></div>
+        <div class="meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M13 2a9 9 0 0 1 9 9 9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9m0-2A11 11 0 1 0 24 11 11 11 0 0 0 13 0z"/></svg>
+          <a href="https://wa.me/94776803526" target="_blank" rel="noopener">+94 77 680 3526</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-text anim-1">
+        <h2>Slice images into<br><em>perfect grids</em><br>instantly.</h2>
+        <p>Upload any image, define your grid dimensions, and download each piece individually. Built for creators, social media managers, and designers.</p>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-val">20×20</div>
+            <div class="stat-label">Max grid</div>
+          </div>
+          <div>
+            <div class="stat-val">PNG</div>
+            <div class="stat-label">Output</div>
+          </div>
+          <div>
+            <div class="stat-val" id="fileSizeStat">0kb</div>
+            <div class="stat-label">Uploaded</div>
+          </div>
+        </div>
+      </div>
+      <div class="anim-2">
+        <div id="uploadArea" class="upload-zone">
+          <div class="upload-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <div class="upload-title">Drop your image here</div>
+          <div class="upload-sub">or click to browse &nbsp;·&nbsp; <kbd>PNG</kbd> <kbd>JPG</kbd> <kbd>WEBP</kbd></div>
+          <input type="file" id="fileInput" accept="image/*">
+          <img id="preview" alt="Preview">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Workspace -->
+<section class="workspace">
+  <div class="wrap">
+    <div class="workspace-layout">
+
+      <!-- Results -->
+      <div class="results-area anim-3">
+        <div class="results-header" id="resultsHeader" style="display:none">
+          <span class="results-title">Grid pieces</span>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span class="results-count" id="resultsCount">0 pieces</span>
+            <button class="btn-dl-all" id="dlAllBtn">Download all</button>
+          </div>
+        </div>
+        <div id="piecesGrid" class="pieces-grid"></div>
+        <div class="empty-state" id="emptyState">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          <p>Upload an image and configure your grid to get started.</p>
+        </div>
+      </div>
+
+      <!-- Controls panel -->
+      <div class="panel anim-3">
+        <div class="panel-header">
+          <span class="panel-title">Grid settings</span>
+        </div>
+        <div class="panel-body">
+
+          <div class="field">
+            <label>Columns <span id="colsDisplay">3</span></label>
+            <div class="stepper">
+              <button id="decreaseCols" aria-label="Decrease columns">−</button>
+              <input type="number" id="colsInput" min="1" max="20" value="3" aria-label="Number of columns">
+              <button id="increaseCols" aria-label="Increase columns">+</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Rows <span id="rowsDisplay">3</span></label>
+            <div class="stepper">
+              <button id="decreaseRows" aria-label="Decrease rows">−</button>
+              <input type="number" id="rowsInput" min="1" max="20" value="3" aria-label="Number of rows">
+              <button id="increaseRows" aria-label="Increase rows">+</button>
+            </div>
+          </div>
+
+          <!-- Live grid preview -->
+          <div id="gridPreview" class="grid-preview" aria-hidden="true"></div>
+
+          <button class="btn-split" id="splitBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <line x1="12" y1="3" x2="12" y2="21"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+            </svg>
+            Split image
+          </button>
+          <p class="hint-text">Click any piece to download it,<br>or use "Download all" above.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 gridsz · image grid splitter · @abdu-xx</span>
+      <div class="footer-links">
+        <a href="https://wa.me/94776803526" target="_blank" rel="noopener">Contact</a>
+        <a href="#" onclick="return false;">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
