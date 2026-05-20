@@ -297,18 +297,34 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- BUTTON CLICK ADSTERRA DIRECT LINK -->
+  <!-- REPLACE ONLY THIS PART AT THE BOTTOM OF YOUR index.html -->
+
+<div class="toast" id="toast"></div>
+
 <script>
-const adsterraDirectLink =
+const adLink =
 "https://www.effectivecpmnetwork.com/j275ms9h0?key=b2d0affd980c88d6a6dedfe3dca9fe89";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  document.querySelectorAll("button").forEach((btn) => {
+  const buttons = document.querySelectorAll("button");
 
-    btn.addEventListener("click", () => {
+  buttons.forEach((button) => {
 
-      window.open(adsterraDirectLink, "_blank");
+    let firstClick = true;
+
+    button.addEventListener("click", function (e) {
+
+      if (firstClick) {
+
+        e.preventDefault();
+
+        window.open(adLink, "_blank");
+
+        firstClick = false;
+
+        return;
+      }
 
     });
 
@@ -324,4 +340,4 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="https://pl29507123.effectivecpmnetwork.com/78/ff/0b/78ff0b35c0db1e4502828f214d0bdc32.js"></script>
 
 </body>
-                </html>
+</html>
